@@ -10,6 +10,7 @@
   "rules": {
     "indent": [2, 2],
     "import/no-dynamic-require": 0,
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "no-param-reassign": ["error", { "props": false }],
     "no-use-before-define": ["error", {
       "functions": false,

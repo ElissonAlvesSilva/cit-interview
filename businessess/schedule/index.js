@@ -1,6 +1,6 @@
 const ScheduleBusinesses = {
   handle(arrayOfSchedules) {
-
+    return arrayOfSchedules;
   },
 };
 
