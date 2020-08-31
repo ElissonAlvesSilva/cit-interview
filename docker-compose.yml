@@ -1,0 +1,12 @@
+version: "2"
+services:
+  app:
+    container_name: cit
+    build:
+      context: .
+      dockerfile: docker/development/Dockerfile
+    ports:
+      - "4513:4513"
+    volumes:
+      - .:/usr/src/app
+    command: nodemon server.js
