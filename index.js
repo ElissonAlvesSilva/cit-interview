@@ -1,4 +1,4 @@
-const ScheduleBusinesses = require('./businessess/schedule');
+const ScheduleBusinesses = require('./businesses/schedule');
 
 const arrayOfSchudules = [
   {
