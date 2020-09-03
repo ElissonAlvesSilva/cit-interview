@@ -1,5 +1,8 @@
+const ScheduleFormatter = require('../../formatters/schedule');
+
 const ScheduleBusinesses = {
   handle(arrayOfSchedules, startDate, endDate) {
+    const response = [];
     if (!startDate || !endDate) {
       const error = {
         code: 1,
@@ -18,7 +21,28 @@ const ScheduleBusinesses = {
       throw error;
     }
 
-    return arrayOfSchedules;
+    const formattedArray = ScheduleFormatter.format(arrayOfSchedules);
+
+    const beforeEndDate = [];
+    const untilEndDate = [];
+
+    formattedArray.forEach((item) => {
+      if (!(item.estimated > 8)
+      && (item.maxDate.getTime() < endDate.getTime())
+      && !(item.maxDate.getTime() <= startDate.getTime())) {
+        beforeEndDate.push(item.id);
+      }
+
+      if (!beforeEndDate.includes(item.id)
+      && item.maxDate.getTime() <= endDate.getTime()) {
+        untilEndDate.push(item.id);
+      }
+    });
+
+    response.push(beforeEndDate);
+    response.push(untilEndDate);
+
+    return response;
   },
 };
 
