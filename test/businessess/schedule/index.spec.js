@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const ScheduleBusinesses = require('../../businessess/schedule');
+const ScheduleBusinesses = require('../../../businessess/schedule');
 
 describe('Schedule', () => {
   let sandbox;
