@@ -57,4 +57,38 @@ describe('Schedule', () => {
       schedule.handle(jobsToRun, '2020-09-09', '2020-09-08');
     }).to.throw('start and end date must to be type equals to date');
   });
+
+  it('should return array result', () => {
+    const response = ScheduleBusinesses.handle(jobsToRun, startDate, endDate);
+    const jobsResponse = [
+      [1, 3],
+      [2],
+    ];
+    expect(response).to.be.a('array');
+    expect(response).to.deep.equals(jobsResponse);
+  });
+
+  it('should return array result with new job added in last date', () => {
+    jobsToRun.push(
+      {
+        ID: 4,
+        Descrição: 'Importação de dados de integração',
+        'Data Máxima de conclusão': new Date('2019-11-11 12:00:00'),
+        'Tempo estimado': '6 horas',
+      },
+      {
+        ID: 5,
+        Descrição: 'Importação de dados de integração',
+        'Data Máxima de conclusão': new Date('2019-11-10 14:00:00'),
+        'Tempo estimado': '6 horas',
+      },
+    );
+    const response = ScheduleBusinesses.handle(jobsToRun, startDate, endDate);
+    const jobsResponse = [
+      [1, 5, 3],
+      [2, 4],
+    ];
+    expect(response).to.be.a('array');
+    expect(response).to.deep.equals(jobsResponse);
+  });
 });
